@@ -4,6 +4,8 @@ This package is designed to achieve two different objectives :
 1. Provide real time object recognition and location for environmental awareness
 2. Provide an analysis of different Convolutional Neural Netwoorks (CNN) performances with respect to distortions
 
+For your confort, this file is available in .md or .html.
+
 ## Introduction
 Developed by Sylvain Chatel for ECE 6258 project, this code is divided into four directories. Each of them has a particular purpose. ```Database/``` aims at retrieving and distorting a database of images. ```mobileNet/```is the directory that holds the real-time image recognition code along with the code for batch recognition. This code was inspired and modified from several online resources such as OpenCV, PYImageSearch and tensorflow tutorial. The ```Darknet/```directory is a clone of Joseph Redmon git : ```https://github.com/pjreddie/darknet.git```. This package provides a code to launch his CNNs called darknet and YOLO. Finally ```Analysis/```provide a analysis of the different CNN performances.
 
@@ -200,4 +202,13 @@ python csv2pickle_2.py -f darknet19_test.txt - darknet19_test
 
 ## 6. Conclusion
 
-## Scripts overview
+## 7. Scripts overview
+
+### real_time_object_detection2.py - adapted
+### object_detection2.py -adapted
+### main_obj_det.py
+### csv2pickle.py
+### csv2pickle_2.py
+### ./darknet from J.Redmon
+### analyse.py
+### analyse_all.py
