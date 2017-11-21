@@ -167,12 +167,12 @@ python csv2pickle_2.py -f densenet_test.txt - densenet_test
 Go to darknet/ directory.
 
 ```
-[> ./darknet classifier predict cfg/imagenet1k.data cfg/darknet.cfg weights/darknet.weights < test_dist.txt |& tee darknet_test1.txt
+./darknet classifier predict cfg/imagenet1k.data cfg/darknet.cfg weights/darknet.weights < test_dist.txt |& tee darknet_test1.txt
 ```
 Make the .txt look better in stream editor
 
 ```
-[> cat darknet_test1.txt| sed 's/^/\;/' |  sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet_test.txt
+cat darknet_test1.txt| sed 's/^/\;/' |  sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet_test.txt
 ```
 
 Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run :
@@ -184,12 +184,12 @@ python csv2pickle_2.py -f darknet_test.txt - darknet_test
 Go to darknet/ directory.
 
 ```
-[> ./darknet classifier predict cfg/imagenet1k.data cfg/darknet19.cfg weights/darknet19.weights < test_dist.txt |& tee darknet19_test1.txt
+./darknet classifier predict cfg/imagenet1k.data cfg/darknet19.cfg weights/darknet19.weights < test_dist.txt |& tee darknet19_test1.txt
 ```
 Make the .txt look better in stream editor
 
 ```
-[> cat darknet19_test1.txt| sed 's/^/\;/' |  sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet19_test.txt
+cat darknet19_test1.txt| sed 's/^/\;/' |  sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet19_test.txt
 ```
 
 Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run :
