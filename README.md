@@ -122,6 +122,8 @@ Now we can run the different CNNs in order to generate csv.txt files.
 
 The work developed by Joseph Redmon ```https://pjreddie.com/```and ```https://github.com/pjreddie/darknet.git``` makes possible to run CNNs he designed and some of the state of the art CNNs. *Note: there is no information however on the trainning used for the learning*.
 
+This phase can take more or less time (between seconds to more than 26 hours depending on the CNN and the dataset). Hence we propose these command which run on a subset of the distorted database located in Database/data_test or in darknet/test2.txt.
+
 ### MobileNet SSD
 Go to mobileNet/object_detect/ directory.
 
