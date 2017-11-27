@@ -1,8 +1,8 @@
 # ECE6258_CNNevaluation
 
-This package is designed to achieve two different objectives :
-1. Provide real time object recognition and location for environmental awareness
-2. Provide an analysis of different Convolutional Neural Netwoorks (CNN) performances with respect to distortions
+This package is designed to achieve two different objectives : 
+1. Provide real time object recognition and location for environmental awareness 
+2. Provide an analysis of different Convolutional Neural Netwoorks (CNN) performances with respect to distortions 
 
 For your confort, this file is available in .md or .html.
 
@@ -17,28 +17,28 @@ Every commands were launched from the terminal. Please make sure you are in the 
 ## Dependencies and requirements
 This code was tested on OSX 10.11.6 using python 2.7. The machine had 8GB 1867 MHz memory and a 2.7 GHz Intel Core i5 processor. We decided not to run it on the GPU in order to keep in mind that in our project mindset, this software should be run on edge devices with no GPU resources. 
 
-The following packages need to be installed on the machine : 
-- OpenCV 
-- python 2.7
-- matplotlib
-- tabulate
-- numpy
-- pickle
-- os
-- argparse
-- Matlab 2017a
+The following packages need to be installed on the machine :  
+- OpenCV  
+- python 2.7 
+- matplotlib 
+- tabulate 
+- numpy 
+- pickle 
+- os 
+- argparse 
+- Matlab 2017a 
 
-The remaining packages where installed and put inside directories directly in the workspace so there should be no need to download it again.
-Please note also that real-time detection requires a webcam to access a live feed. 
+The remaining packages where installed and put inside directories directly in the workspace so there should be no need to download it again. 
+Please note also that real-time detection requires a webcam to access a live feed.  
 
-## Plan
-1. Workspace overview
-2. Real-time recognition
-3. Database creation
-4. CNN evaluation
-5. Analysis
-6. Conclusion
-7. Scripts overview
+## Plan 
+1. Workspace overview 
+2. Real-time recognition 
+3. Database creation 
+4. CNN evaluation 
+5. Analysis 
+6. Conclusion 
+7. Scripts overview 
 
 ## 1. Workspace overview
 Analysis/  
