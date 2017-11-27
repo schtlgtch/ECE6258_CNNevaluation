@@ -7,12 +7,12 @@ This package is designed to achieve two different objectives :
 For your confort, this file is available in .md or .html.
 
 ## Introduction
-Developed by Sylvain Chatel for ECE 6258 project, this code is divided into four directories. Each of them has a particular purpose. ```Database/``` aims at retrieving and distorting a database of images. ```mobileNet/```is the directory that holds the real-time image recognition code along with the code for batch recognition. This code was inspired and modified from several online resources such as OpenCV, PYImageSearch and tensorflow tutorial. The ```Darknet/```directory is a clone of Joseph Redmon git : ```https://github.com/pjreddie/darknet.git```. This package provides a code to launch his CNNs called darknet and YOLO. Finally ```Analysis/```provide a analysis of the different CNN performances.
+Developed by Sylvain Chatel for ECE 6258 project, this code is divided into four directories. Each of them has a particular purpose. ```Database/``` aims at retrieving and distorting a database of images. ```mobileNet/``` is the directory that holds the real-time image recognition code along with the code for batch recognition. This code was inspired and modified from several online resources such as OpenCV, PYImageSearch and tensorflow tutorial. The ```Darknet/``` directory is a clone of Joseph Redmon git : ```https://github.com/pjreddie/darknet.git```. This package provides a code to launch his CNNs called darknet and YOLO. Finally ```Analysis/``` provides a analysis of the different CNN performances.
 
 Note : The most interesting part of this work lies in the Analysis and not in the CNNs implementation.
 
 ## Note 
-Every commands were launched from the terminal. Please make sure you are in the rigth directory before launching.
+Every commands were launched from the terminal. Please make sure you are in the right directory before launching.
 
 ## Dependencies and requirements
 This code was tested on OSX 10.11.6 using python 2.7. The machine had 8GB 1867 MHz memory and a 2.7 GHz Intel Core i5 processor. We decided not to run it on the GPU in order to keep in mind that in our project mindset, this software should be run on edge devices with no GPU resources. 
@@ -136,19 +136,19 @@ python main_obj_det.py --prototxt MobileNetSSD_deploy.prototxt.txt --model Mobil
 
 Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run :
 ```
-python csv2pickle.py -f mobile_test.txt - mobile_test
+python csv2pickle.py -f mobile_test.txt -o mobile_test
 ```
 
 ### tiny YOLO using ./darknet
 Go to darknet/ directory. Please note that aside from a few text files and database directories this darknet/directory was retrieve from J.Redmon Github and was used as is.
 
 ```
-./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg weights/tiny-yolo-voc.weights < test2.txt | sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%/\;/ ' | tr '\n' ' ' | tr -d ' ' | sed 's/EnterImagePath;//;' | sed 's/EnterImagePath;/\n/g ' >tyolo_test.txt
+./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg weights/tiny-yolo-voc.weights < test2.txt | sed 's/data\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%/\;/ ' | tr '\n' ' ' | tr -d ' ' | sed 's/EnterImagePath;//;' | sed 's/EnterImagePath;/\n/g ' >tyolo_test.txt
 ```
 
-Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run :
+Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run from there:
 ```
-python csv2pickle.py -f tyolo_test.txt - tyolo_test
+python csv2pickle.py -f tyolo_test.txt -o tyolo_test
 ```
 
 ### densenet201 
@@ -160,12 +160,12 @@ Go to darknet/ directory.
 Make the .txt look better in stream editor
 
 ```
-cat densenet_test1.txt| sed 's/^/\;/' |  sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >densenet_test.txt
+cat densenet_test1.txt| sed 's/^/\;/' |  sed 's/data\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >densenet_test.txt
 ```
 
-Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run :
+Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run from there:
 ```
-python csv2pickle_2.py -f densenet_test.txt - densenet_test
+python csv2pickle_2.py -f densenet_test.txt -o densenet_test
 ```
 
 ### darknet 
@@ -177,12 +177,12 @@ Go to darknet/ directory.
 Make the .txt look better in stream editor after removing manually the network model (until the first 'Enter'): 
 
 ```
-cat darknet_test1.txt| sed 's/^/\;/' |  sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet_test.txt
+cat darknet_test1.txt| sed 's/^/\;/' |  sed 's/data\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet_test.txt
 ```
 
-Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run :
+Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run from there:
 ```
-python csv2pickle_2.py -f darknet_test.txt - darknet_test
+python csv2pickle_2.py -f darknet_test.txt -o darknet_test
 ```
 
 ### darknet19
@@ -194,12 +194,12 @@ Go to darknet/ directory.
 Make the .txt look better in stream editor
 
 ```
-cat darknet19_test1.txt| sed 's/^/\;/' |  sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet19_test.txt
+cat darknet19_test1.txt| sed 's/^/\;/' |  sed 's/data\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet19_test.txt
 ```
 
 Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run :
 ```
-python csv2pickle_2.py -f darknet19_test.txt - darknet19_test
+python csv2pickle_2.py -f darknet19_test.txt -o darknet19_test
 ```
 
 
@@ -221,7 +221,7 @@ At this point, the analysis can start. To do so, we created different scripts to
 This versatile script is the beginning of everything. It can display scatter plots of the elapsed time or the accuracy for different filters (object class speciifed or distortion specified). Let us expand a little more on how it works. 
 
 ```
-python analyse.py -f pickles/arg0 -p arg1 -feat arg2 -obj arg3 -dist arg4 -rel arg5
+python analyse.py -f pickles/arg0 -p arg1 -feat arg2 -obj arg3 -dist arg4 -rel arg5 -l arg6 -r arg7
 ```
 
 arg0 is the name of the pickle file with the pickle extension -- e.g. 'tinyyolo_dist.pickle'.  
@@ -230,22 +230,24 @@ arg2 is the feature user wants to analyse : choose between 'time', 'accuracy' or
 arg3 is the object class filter : '0' for chairs, '1' for table and '2' for sofas.  
 arg4 is the distortion filter : '0' for the original, '1' for the equalized, '2' for the blurred 2, '3' for the blurred 5, '4' for the blurred 7, '5' for the ligthened, '6' for the very lightened and '7' for the darkened.  
 arg5 is the knob to proceed to the 'comparison' feature for accuracy relative to original images.  
+arg6 is the knob to limit the number of samples considered -- e.g. -l 10 takes the first ten images.   
+arg7 is to set the previous selection to a rndom pooling instead of taking the first images.  
 
 Let us present some examples 
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p yes -feat time
 ```
-Display a scatter plot of elapsed time for all distortions for all images for the MobileNet recognition. 
+Displays a scatter plot of elapsed time for all distortions for all images for the MobileNet recognition. 
 
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p yes -feat time -obj 0 -dist 1
 ```
-Display a scatter plot of elapsed time for equalized chair images for the MobileNet recognition. 
+Displays a scatter plot of elapsed time for equalized chair images for the MobileNet recognition. 
 
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p yes -feat accuracy -obj 2 -dist 5
 ```
-Display a scatter plot of the accuracy along with statistics in the console for ligthened sofa images recognised with MobileNet. 
+Displays a scatter plot of the accuracy along with statistics in the console for ligthened sofa images recognised with MobileNet. 
 
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p yes -feat comparison
@@ -262,7 +264,7 @@ This proceed to the same analysis expect the object are only taken from the 'cha
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p no -feat comparison -obj 0 -rel true
 ```
-By setting te argument ```-rel true``` the statistical analysis is no longer made on the accuracy but the difference of accuracy with respect to the accuracy in the original image.  
+By setting the argument ```-rel true``` the statistical analysis is no longer made on the accuracy but the difference of accuracy with respect to the accuracy in the original image.  
 
 ### analyse_all.py
 This script allows user to do an analysis over all CNNs at the same time. By putting as an argument the directory storing the pickle files, a statistical analysis can be conducted. It generates an analysis for all images in the database regardless of their class. Accuracy refers to the predominant object in the image -which is supposedly the object of from the class the image is from (chair, table or sofa). 
@@ -285,19 +287,90 @@ python analyse_all.py -d pickles -p yes -rel true
 Proceeds to the same analysis with a relative approach. 
 
 ### confusion.py
+This script creates confusion matrices for a particular distortion for a particular CNN.
+```
+python confusion.py -f arg0 -dist arg1
+```
+arg0 is the path to the pickle file.  
+arg1 is the distortion to use : '0' for the original, '1' for the equalized, '2' for the blurred 2, '3' for the blurred 5, '4' for the blurred 7, '5' for the ligthened, '6' for the very lightened and '7' for the darkened.  
+ 
+This script creates confusion matrices for a particular distortion for a particular CNN.    
 
+We can explicit a bit more on this matrix. Let say M=m(i,j), then m(i,j) is the probability of having an image from database i classified with a j predominant object.  
 
+As an example, we can run this scrip for MobileNet with no distortion:
+```
+python confusion.py -f pickles/mobile_dist.pickle -dist 0
+```
+This script is quite useful to assess the effect of distortions on classification capabilities of CNNs.  
 
 ## 6. Conclusion
+In this semester long project, we were able to use state of the art machine recognition based on CNN to produce a real-time environmental awareness software. Through an analysis of different CNNs, we were able to assess the resiliency and performances with respect to distortions that could be encountered in real life : blur, exposition or change in colors.
 
 ## 7. Scripts overview
+Overview of how the funcions are working. 
 
 ### real_time_object_detection2.py - adapted
+```
+python real_time_object_detection2.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel
+```
+
 ### object_detection2.py -adapted
+```
+python object_detection2.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel --image arg0
+```
+arg0 is the path to the image -e.g. ```images/example_1.JPEG```.
+
 ### main_obj_det.py
+```
+python main_obj_det.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel --directory arg0
+```
+arg0 is the name of the directory storing image to classify.
+
 ### csv2pickle.py
+```
+python csv2pickle.py -f arg0 -o arg1
+```
+arg0 is the input csv file --e.g. CNN_csv/tyolo_dist.txt  
+arg1 is the output pickle file name --e.g. tinyyolo_dist
+
 ### csv2pickle_2.py
+```
+python csv2pickle_2.py -f arg0 -o arg1
+```
+arg0 is the input csv file --e.g. CNN_csv/tyolo_dist.txt  
+arg1 is the output pickle file name --e.g. tinyyolo_dist
+
 ### ./darknet from J.Redmon
+Developed by J.Redmon, please see above for how to run it. We also added some ```sed```modifications in order to make the output more readable.
+
 ### analyse.py
+```
+python analyse.py -f pickles/arg0 -p arg1 -feat arg2 -obj arg3 -dist arg4 -rel arg5 -l arg6 -r arg7
+```
+
+arg0 is the name of the pickle file with the pickle extension -- e.g. 'tinyyolo_dist.pickle'.  
+arg1 is a string to specified if user wants to display plots or not -- 'yes' /'no'.  
+arg2 is the feature user wants to analyse : choose between 'time', 'accuracy' or 'comparison'.  
+arg3 is the object class filter : '0' for chairs, '1' for table and '2' for sofas.  
+arg4 is the distortion filter : '0' for the original, '1' for the equalized, '2' for the blurred 2, '3' for the blurred 5, '4' for the blurred 7, '5' for the ligthened, '6' for the very lightened and '7' for the darkened.  
+arg5 is the knob to proceed to the 'comparison' feature for accuracy relative to original images.  
+arg6 is the knob to limit the number of samples considered -- e.g. -l 10 takes the first ten images.   
+arg7 is to set the previous selection to a rndom pooling instead of taking the first images.  
+
+
 ### analyse_all.py
+```
+python analyse_all.py -d arg0 -p arg1 -rel arg2
+```
+arg0 is the directory storing the pickles.  
+arg1 is to plot or not the graphs -- 'yes' /'no'.  
+arg2 is to set the relative coparison.  
+
 ### confusion.py
+```
+python confusion.py -f arg0 -dist arg1
+```
+arg0 is the path to the pickle file.  
+arg1 is the distortion to use : '0' for the original, '1' for the equalized, '2' for the blurred 2, '3' for the blurred 5, '4' for the blurred 7, '5' for the ligthened, '6' for the very lightened and '7' for the darkened.  
+
