@@ -206,32 +206,32 @@ python csv2pickle_2.py -f darknet19_test.txt - darknet19_test
 ## 5. Analysis
 Now that we have generated a database of image recognition for different CNNs when different distortions are applied, we can proceed to the analysis. Please change the current folder to the Analysis/ directory. 
 
-In this directory, the reader can find five scripts and two directories. The first two scripts ```csv2pickle.py``` and ```csv2pickle_2.py``` are designed to export the csv generated in the previous section to a python pickle variable. Depending on the CNN used, one of the two scripts is to be used. This is due to a difference in the output provided by ./Darknet.
+In this directory, the reader can find five scripts and two directories. The first two scripts ```csv2pickle.py``` and ```csv2pickle_2.py``` are designed to export the csv generated in the previous section to a python pickle variable. Depending on the CNN used, one of the two scripts is to be used. This is due to a difference in the output provided by ./Darknet. 
 
-If the CNN is MobileNet or Tiny Yolo, please use ```csv2pickle.py```. Else, use the other one.
+If the CNN is MobileNet or Tiny Yolo, please use ```csv2pickle.py```. Else, use the other one. 
 
-The generated pickles can be moved to the ```pickles/``` directory for future use. 
+The generated pickles can be moved to the ```pickles/``` directory for future use.  
 
-The original CSV files are stored in the ```CNN_csv/```directory. 
+The original CSV files are stored in the ```CNN_csv/```directory.  
 
 
-At this point, the analysis can start. To do so, we created different scripts to help go through the database. 
+At this point, the analysis can start. To do so, we created different scripts to help go through the database.  
 
 ### analyse.py
-This versatile script is the beginning of everything. It can display scatter plots of the elapsed time or the accuracy for different filters (object class speciifed or distortion specified). Let us expand a little more on how it works.
+This versatile script is the beginning of everything. It can display scatter plots of the elapsed time or the accuracy for different filters (object class speciifed or distortion specified). Let us expand a little more on how it works. 
 
 ```
 python analyse.py -f pickles/arg0 -p arg1 -feat arg2 -obj arg3 -dist arg4 -rel arg5
 ```
 
-arg0 is the name of the pickle file with the pickle extension -- e.g. 'tinyyolo_dist.pickle'.
-arg1 is a string to specified if user wants to display plots or not -- 'yes' /'no'.
-arg2 is the feature user wants to analyse : choose between 'time', 'accuracy' or 'comparison'.
-arg3 is the object class filter : '0' for chairs, '1' for table and '2' for sofas.
-arg4 is the distortion filter : '0' for the original, '1' for the equalized, '2' for the blurred 2, '3' for the blurred 5, '4' for the blurred 7, '5' for the ligthened, '6' for the very lightened and '7' for the darkened.
-arg5 is the knob to proceed to the 'comparison' feature for accuracy relative to original images.
+arg0 is the name of the pickle file with the pickle extension -- e.g. 'tinyyolo_dist.pickle'.  
+arg1 is a string to specified if user wants to display plots or not -- 'yes' /'no'.  
+arg2 is the feature user wants to analyse : choose between 'time', 'accuracy' or 'comparison'.  
+arg3 is the object class filter : '0' for chairs, '1' for table and '2' for sofas.  
+arg4 is the distortion filter : '0' for the original, '1' for the equalized, '2' for the blurred 2, '3' for the blurred 5, '4' for the blurred 7, '5' for the ligthened, '6' for the very lightened and '7' for the darkened.  
+arg5 is the knob to proceed to the 'comparison' feature for accuracy relative to original images.  
 
-Let us present some examples
+Let us present some examples 
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p yes -feat time
 ```
@@ -250,19 +250,41 @@ Display a scatter plot of the accuracy along with statistics in the console for 
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p yes -feat comparison
 ```
-Returns in the console the comparative table for MobileNet recognition with respect to distortions for all images from all three classes. If ```-p yes``` is set, then it will also plot in Figure 1 the candlestick analysis and in Figure 2 to 9 the histograms of the accuracy.
+Returns in the console the comparative table for MobileNet recognition with respect to distortions for all images from all three classes. If ```-p yes``` is set, then it will also plot in Figure 1 the candlestick analysis and in Figures 2 to 9 the histograms of the accuracy. 
 
-We can observe that those histograms seem to be exponential. Also, the candlestick graph represent for each distortion the statistical results : the black line link the maximum accuracy and the minimum accuracy. The cross marks the mean accuracy and the grey box the accuracy plus and minu the standard deviation. 
+We can observe that those histograms seem to be exponential. Also, the candlestick graph represent for each distortion the statistical results : the black line link the maximum accuracy and the minimum accuracy. The cross marks the mean accuracy and the grey box the accuracy plus and minu the standard deviation.  
 
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p yes -feat comparison -obj 0
 ```
-This proceed to the same analysis expect the object are only taken from the 'chair' database. The dropped percentage represent the percentage of 'dropped' images : images that could no longer be recognised by the network as chairs.
+This proceed to the same analysis expect the object are only taken from the 'chair' database. The dropped percentage represent the percentage of 'dropped' images : images that could no longer be recognised by the network as chairs. 
 
 ```
 python analyse.py -f pickles/mobile_dist.pickle -p no -feat comparison -obj 0 -rel true
 ```
-By setting te argument ```-rel true``` the statistical analysis is no longer made on the accuracy but the difference of accuracy with respect to the accuracy in the original image. 
+By setting te argument ```-rel true``` the statistical analysis is no longer made on the accuracy but the difference of accuracy with respect to the accuracy in the original image.  
+
+### analyse_all.py
+This script allows user to do an analysis over all CNNs at the same time. By putting as an argument the directory storing the pickle files, a statistical analysis can be conducted. It generates an analysis for all images in the database regardless of their class. Accuracy refers to the predominant object in the image -which is supposedly the object of from the class the image is from (chair, table or sofa). 
+
+```
+python analyse_all.py -d arg0 -p arg1 -rel arg2
+```
+arg0 is the directory storing the pickles. 
+arg1 is to plot or not the graphs -- 'yes' /'no'. 
+arg2 is to set the relative coparison. 
+
+```
+python analyse_all.py -d pickles -p yes
+```
+This creates Table 1 presented in the report (need to add manually the ellapsed time). It also plots a candlestick graph for all CNN for all distortions. 
+
+```
+python analyse_all.py -d pickles -p yes -rel true
+```
+Proceeds to the same analysis with a relative approach. 
+
+### confusion.py
 
 
 
