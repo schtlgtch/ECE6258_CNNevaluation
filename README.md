@@ -140,22 +140,22 @@ python csv2pickle.py -f mobile_test.txt - mobile_test
 ```
 
 ### tiny YOLO using ./darknet
-Go to darknet/ directory.
+Go to darknet/ directory. Please note that aside from a few text files and database directories this darknet/directory was retrieve from J.Redmon Github and was used as is.
 
 ```
-./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg weights/tiny-yolo-voc.weights < test.txt | sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%/\;/ ' | tr '\n' ' ' | tr -d ' ' | sed 's/EnterImagePath;//;' | sed 's/EnterImagePath;/\n/g ' >tyolo_dist.txt
+./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg weights/tiny-yolo-voc.weights < test2.txt | sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%/\;/ ' | tr '\n' ' ' | tr -d ' ' | sed 's/EnterImagePath;//;' | sed 's/EnterImagePath;/\n/g ' >tyolo_test.txt
 ```
 
 Then, to export this csv.txt to a pickle variable just copy the .txt to Analysis/ and run :
 ```
-python csv2pickle.py -f tyolo_dist.txt - tyolo_test
+python csv2pickle.py -f tyolo_test.txt - tyolo_test
 ```
 
 ### densenet201 
 Go to darknet/ directory.
 
 ```
-./darknet classifier predict cfg/imagenet1k.data cfg/densenet201.cfg weights/densenet201.weights < test_dist.txt |& tee densenet_test1.txt
+./darknet classifier predict cfg/imagenet1k.data cfg/densenet201.cfg weights/densenet201.weights < test2.txt |& tee densenet_test.txt
 ```
 Make the .txt look better in stream editor
 
@@ -172,9 +172,9 @@ python csv2pickle_2.py -f densenet_test.txt - densenet_test
 Go to darknet/ directory.
 
 ```
-./darknet classifier predict cfg/imagenet1k.data cfg/darknet.cfg weights/darknet.weights < test_dist.txt |& tee darknet_test1.txt
+./darknet classifier predict cfg/imagenet1k.data cfg/darknet.cfg weights/darknet.weights < test2.txt |& tee darknet_test.txt
 ```
-Make the .txt look better in stream editor
+Make the .txt look better in stream editor after removing manually the network model (until the first 'Enter'): 
 
 ```
 cat darknet_test1.txt| sed 's/^/\;/' |  sed 's/data_distorted\///;  s/: Predicted in /\;/;s/ seconds./\;/; s/\n/\;/; s/: /\;/; s/%// ' | tr -d '\n'  | sed 's/;Enter Image Path\;//;' | sed 's/Enter Image Path\;/\n/g' | sed 's/\;\;/\;/;'  >darknet_test.txt
@@ -189,7 +189,7 @@ python csv2pickle_2.py -f darknet_test.txt - darknet_test
 Go to darknet/ directory.
 
 ```
-./darknet classifier predict cfg/imagenet1k.data cfg/darknet19.cfg weights/darknet19.weights < test_dist.txt |& tee darknet19_test1.txt
+./darknet classifier predict cfg/imagenet1k.data cfg/darknet19.cfg weights/darknet19.weights < test2.txt |& tee darknet19_test.txt
 ```
 Make the .txt look better in stream editor
 
@@ -204,6 +204,67 @@ python csv2pickle_2.py -f darknet19_test.txt - darknet19_test
 
 
 ## 5. Analysis
+Now that we have generated a database of image recognition for different CNNs when different distortions are applied, we can proceed to the analysis. Please change the current folder to the Analysis/ directory. 
+
+In this directory, the reader can find five scripts and two directories. The first two scripts ```csv2pickle.py``` and ```csv2pickle_2.py``` are designed to export the csv generated in the previous section to a python pickle variable. Depending on the CNN used, one of the two scripts is to be used. This is due to a difference in the output provided by ./Darknet.
+
+If the CNN is MobileNet or Tiny Yolo, please use ```csv2pickle.py```. Else, use the other one.
+
+The generated pickles can be moved to the ```pickles/``` directory for future use. 
+
+The original CSV files are stored in the ```CNN_csv/```directory. 
+
+
+At this point, the analysis can start. To do so, we created different scripts to help go through the database. 
+
+### analyse.py
+This versatile script is the beginning of everything. It can display scatter plots of the elapsed time or the accuracy for different filters (object class speciifed or distortion specified). Let us expand a little more on how it works.
+
+```
+python analyse.py -f pickles/arg0 -p arg1 -feat arg2 -obj arg3 -dist arg4 -rel arg5
+```
+
+arg0 is the name of the pickle file with the pickle extension -- e.g. 'tinyyolo_dist.pickle'.
+arg1 is a string to specified if user wants to display plots or not -- 'yes' /'no'.
+arg2 is the feature user wants to analyse : choose between 'time', 'accuracy' or 'comparison'.
+arg3 is the object class filter : '0' for chairs, '1' for table and '2' for sofas.
+arg4 is the distortion filter : '0' for the original, '1' for the equalized, '2' for the blurred 2, '3' for the blurred 5, '4' for the blurred 7, '5' for the ligthened, '6' for the very lightened and '7' for the darkened.
+arg5 is the knob to proceed to the 'comparison' feature for accuracy relative to original images.
+
+Let us present some examples
+```
+python analyse.py -f pickles/mobile_dist.pickle -p yes -feat time
+```
+Display a scatter plot of elapsed time for all distortions for all images for the MobileNet recognition. 
+
+```
+python analyse.py -f pickles/mobile_dist.pickle -p yes -feat time -obj 0 -dist 1
+```
+Display a scatter plot of elapsed time for equalized chair images for the MobileNet recognition. 
+
+```
+python analyse.py -f pickles/mobile_dist.pickle -p yes -feat accuracy -obj 2 -dist 5
+```
+Display a scatter plot of the accuracy along with statistics in the console for ligthened sofa images recognised with MobileNet. 
+
+```
+python analyse.py -f pickles/mobile_dist.pickle -p yes -feat comparison
+```
+Returns in the console the comparative table for MobileNet recognition with respect to distortions for all images from all three classes. If ```-p yes``` is set, then it will also plot in Figure 1 the candlestick analysis and in Figure 2 to 9 the histograms of the accuracy.
+
+We can observe that those histograms seem to be exponential. Also, the candlestick graph represent for each distortion the statistical results : the black line link the maximum accuracy and the minimum accuracy. The cross marks the mean accuracy and the grey box the accuracy plus and minu the standard deviation. 
+
+```
+python analyse.py -f pickles/mobile_dist.pickle -p yes -feat comparison -obj 0
+```
+This proceed to the same analysis expect the object are only taken from the 'chair' database. The dropped percentage represent the percentage of 'dropped' images : images that could no longer be recognised by the network as chairs.
+
+```
+python analyse.py -f pickles/mobile_dist.pickle -p no -feat comparison -obj 0 -rel true
+```
+By setting te argument ```-rel true``` the statistical analysis is no longer made on the accuracy but the difference of accuracy with respect to the accuracy in the original image. 
+
+
 
 ## 6. Conclusion
 
