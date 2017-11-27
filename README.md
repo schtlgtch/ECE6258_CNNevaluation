@@ -89,7 +89,7 @@ python real_time_object_detection2.py --prototxt MobileNetSSD_deploy.prototxt.tx
 To run the network over a single image, go to ```mobileNet/object_detect/``` and run ```object_detection2.py```.
 
 ```
-python object_detection2.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel --image images/example_01.jpg
+python object_detection2.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel --image images/example_1.jpg
 ```
 Finally, to run the CNN over a batch of images, specify the directory with ```--directory``` and run ```main_obj_det.py```.
 
