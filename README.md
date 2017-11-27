@@ -45,7 +45,8 @@ Analysis/
 - analyse_all.py : python script comparing all CNNs in pickles/ with respect to accuracy and plot results  
 - analyse.py : python script determinining a CNN performance with respect to time, accuracy and distortions  
 - csv2pickle.py : python script creating a python pickle variable from a csv for YOLO and mobileNet CNN  
-- csv2pickle_2.py :  python script creating a python pickle variable from a csv for all other CNNs  
+- csv2pickle_2.py :  python script creating a python pickle variable from a csv for all other CNNs 
+- confusion.py : python script to compute confusion matrices
 
 Analysis/CNN_csv/ :  directory holding the csv  
 
