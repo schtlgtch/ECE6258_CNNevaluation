@@ -39,6 +39,7 @@ Please note also that real-time detection requires a webcam to access a live fee
 5. Analysis 
 6. Conclusion 
 7. Scripts overview 
+8. Explicit protocol to get the same results as the paper 
 
 ## 1. Workspace overview
 Analysis/  
@@ -374,3 +375,26 @@ python confusion.py -f arg0 -dist arg1
 arg0 is the path to the pickle file.  
 arg1 is the distortion to use : '0' for the original, '1' for the equalized, '2' for the blurred 2, '3' for the blurred 5, '4' for the blurred 7, '5' for the ligthened, '6' for the very lightened and '7' for the darkened.  
 
+
+## 8. Explicit protocol to get the same results as the paper
+In order to get Table 1 and Figure 2, please run in the Analysis/ directory the following :  
+```
+python analyse_all.py -d pickles -p yes
+```
+
+Note that the "elapsed time " is missing. Please run for each CNN the following :   
+```
+python analyse.py -f pickles/mobile_dist.pickle -p no -feat comparison
+```
+
+In order to generate Table 2, please run for each CNN the following :  
+```
+python analyse.py -f pickles/mobile_dist.pickle -p yes -feat comparison -obj 0 -rel true
+```
+
+In order to generate Figure 3, please refer to the real-time protocol above.   
+
+Finally, in order to genretate the confusion matrices mentioned in the article, please run for -dist 0 and -dist 3 :
+```
+python confusion.py -f pickles/mobile_dist.pickle -dist 0
+```
