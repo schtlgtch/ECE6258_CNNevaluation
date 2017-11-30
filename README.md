@@ -81,7 +81,7 @@ OpenCV/ : OpenCV package from github
 README.md
 
 ## 2. Real-time recognition
-In order to run a real-time detection using a webcam and MobileNet SSD CNN, the user needs to go to ```mobileNet/RT_object_detect/``` and run ```real_time_object_detection2.py```.
+In order to run a real-time detection using a webcam and MobileNet SSD CNN, the user needs to go to ```mobileNet/RT_object_detect/``` and run ```real_time_object_detection2.py```. If a common object such as a chair, table or sofa is in front of the camera, a warning message will be displayed on the console. 
 
 ```
 python real_time_object_detection2.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel
