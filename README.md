@@ -18,7 +18,9 @@ Every commands were launched from the terminal. Please make sure you are in the 
 This code was tested on OSX 10.11.6 using python 2.7. The machine had 8GB 1867 MHz memory and a 2.7 GHz Intel Core i5 processor. We decided not to run it on the GPU in order to keep in mind that in our project mindset, this software should be run on edge devices with no GPU resources. 
 
 The following packages need to be installed on the machine :      
-- OpenCV      
+- OpenCV    
+- imutils   
+- time   
 - python 2.7      
 - matplotlib     
 - tabulate     
